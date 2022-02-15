@@ -1,0 +1,14 @@
+POST http://127.0.0.1:5000/api/sensor_data
+Content-Type: application/json
+
+{
+    "node_id": 1,
+    "temperature": 35,
+    "humidity": 30
+}
+
+###
+GET http://127.0.0.1:5000/api/node_data
+
+###
+GET http://127.0.0.1:5000/api/sensor_data
