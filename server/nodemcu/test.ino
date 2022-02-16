@@ -12,9 +12,9 @@ const char* serverName = "http://192.168.1.106:1880/api/sensor_data";
 // milliseconds, will quickly become a bigger number than can be stored in an int.
 unsigned long lastTime = 0;
 // Timer set to 10 minutes (600000)
-//unsigned long timerDelay = 600000;
+unsigned long timerDelay = 1000 * 30;
 // Set timer to 5 seconds (5000)
-unsigned long timerDelay = 10000;
+// unsigned long timerDelay = 10000;
 
 void setup() {
   Serial.begin(115200);
@@ -36,6 +36,9 @@ void setup() {
 void loop() {
   //Send an HTTP POST request every 10 minutes
   if ((millis() - lastTime) > timerDelay) {
+
+    float temperature = 0.00;
+    float humidity = 0.00;
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
       WiFiClient client;
@@ -46,7 +49,7 @@ void loop() {
       
       // If you need an HTTP request with a content type: application/json, use the following:
       http.addHeader("Content-Type", "application/json");
-      int httpResponseCode = http.POST("{\"node_id\":\"1\",\"temperature\":\"30.2\",\"humidity\":\"24.25\"}");
+      int httpResponseCode = http.POST("{\"node_id\":\"1\",\"temperature\":\""+String(temperature)+"\",\"humidity\":\""+String(humidity)+"\"}");
      
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);
