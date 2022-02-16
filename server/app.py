@@ -46,8 +46,12 @@ def sensor_data():
     # Creat data
     if request.method == "POST":
         data = request.get_json()
-        save_data(data['node_id'], data['temperature'], data['humidity'])
-        update_node_data(data['node_id'], data['temperature'], data['humidity'])
+        node_id = data['node_id']
+        temp = float(data['temperature'])
+        humi = float(data['humidity'])
+
+        save_data(node_id, temp, humi)
+        update_node_data(node_id, temp, humi)
         return make_response(jsonify({"status": "OK"},200))
     elif request.method == "GET":
         data = get_sensor_data()
