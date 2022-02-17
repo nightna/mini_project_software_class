@@ -1,22 +1,22 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-host_server = 'http://localhost:5000'
+axios.defaults.baseURL = 'http://localhost:5000';
 
 export const useSensorStore = defineStore({
   id: 'sensor',
   state: () => ({
-    sensorData: 0
+    sensorData: []
   }),
   actions: {
-    async getSensorData() {
-      try {
-        res = await axios.get(host_server + '/api/sensor_data')\
+    getSensorData()
+    {
+      return axios.get("/api/sensor_data").then(res => {
         this.sensorData = res.data
         console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      }).catch(e => {
+        console.log(e);
+      })
     }
   }
 })

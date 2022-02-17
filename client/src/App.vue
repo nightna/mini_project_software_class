@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from "vue";
 import { RouterLink, RouterView, useRoute } from "vue-router";
 
 const route = useRoute();

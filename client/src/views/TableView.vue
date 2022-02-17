@@ -1,13 +1,11 @@
 <script setup>
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
 import { useSensorStore } from '../stores/sensor';
-const main = useSensorStore()
+import moment from 'moment'
 
-const {sensorData} = storeToRefs(main)
-const {getSensorData} = main
-
-await getSensorData()
+const store = useSensorStore()
+const {sensorData} = storeToRefs(store)
+store.getSensorData()
 
 </script>
 
@@ -35,12 +33,12 @@ await getSensorData()
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
+            <tr v-for="s in sensorData">
+              <td>{{s.id}}</td>
+              <td>{{s.node_id}}</td>
+              <td>{{s.temperature}}</td>
+              <td>{{s.humidity}}</td>
+              <td>{{moment(s.created_at).format("HH:mm:ss DD/MM/YY")}}</td>
             </tr>
           </tbody>
         </table>

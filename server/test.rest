@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "node_id": 1,
-    "temperature": 35,
+    "temperature": 20,
     "humidity": 30
 }
 

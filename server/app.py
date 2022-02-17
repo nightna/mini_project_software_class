@@ -2,8 +2,11 @@ from flask import Flask,request,jsonify, make_response
 import datetime
 import json
 import mysql.connector
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 app.config["JSON_AS_ASCII"] = False
 host="localhost"
 user = "root"
@@ -13,8 +16,10 @@ password = ""
 def save_data(node_id, temp, humi):
     mydb = mysql.connector.connect(host=host , user = user, password = password, db = db )
     mycursor = mydb.cursor(dictionary = True)
-    sql = "INSERT INTO sensor_data (node_id,temperature,humidity) VALUES (%s,%s,%s)"
-    val = (node_id,temp,humi)
+    sql = "INSERT INTO sensor_data (node_id,temperature,humidity,created_at) VALUES (%s,%s,%s,%s)"
+    current_Date = datetime.datetime.now()
+    formatted_date = current_Date.strftime("%Y-%m-%d %H:%M:%S")
+    val = (node_id,temp,humi,formatted_date)
     mycursor.execute(sql,val)
     mydb.commit()
 
