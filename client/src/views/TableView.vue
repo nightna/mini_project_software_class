@@ -4,6 +4,8 @@ import { useSensorStore } from '../stores/sensor';
 import moment from 'moment'
 
 const store = useSensorStore()
+store.$reset()
+
 const {sensorData} = storeToRefs(store)
 store.getSensorData()
 

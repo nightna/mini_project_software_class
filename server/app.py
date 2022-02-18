@@ -1,14 +1,10 @@
 from flask import Flask,request,jsonify, make_response
-import mysql.connector
 from flask_cors import CORS
-import services
+import services as services
 
 app = Flask(__name__)
 CORS(app)
-
 app.config["JSON_AS_ASCII"] = False
-
-
 # Create
 @app.route("/api/sensor_data",methods = ["POST", "GET"])
 def sensor_data():
@@ -34,4 +30,4 @@ def read():
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')

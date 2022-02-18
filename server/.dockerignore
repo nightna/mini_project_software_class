@@ -1,0 +1,10 @@
+.git/
+__pycache__/
+.gitignore
+venv/
+README.md
+nodemcu/
+*.log
+Pipfile
+Pipfile.lock
+mini_project.sql

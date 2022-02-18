@@ -1,10 +1,10 @@
 from db import DB
 import datetime
 
-host="localhost"
-user = "root"
-db = "mini_project"
-password = ""
+host="remotemysql.com"
+user = "l3TwHwPuiC"
+db = "l3TwHwPuiC"
+password = "V990J6oxnK"
 
 db = DB(host, user, db, password)
 

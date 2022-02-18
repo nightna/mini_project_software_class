@@ -1,26 +1,44 @@
 <script setup>
-import { onMounted, watch } from "vue";
-import {useGaugeStore} from "../stores/gauge"
+import { onMounted, onUpdated, ref } from 'vue';
 
 const props = defineProps({
   id: String,
   value: Number
 })
 
-const store = useGaugeStore()
-const {initGuage, setGauge} = store
+const gauge = ref(null)
 
 onMounted(() => {
-    console.log(props);
-    initGuage(props.id, props.value)
+   gauge.value = Gauge(
+        document.getElementById(props.id),
+        {
+            min: -0,
+            max: 100,
+            dialStartAngle: 180,
+            dialEndAngle: 0,
+            value: props.value,
+            viewBox: "0 0 100 57",
+            color: function(value) {
+                if(value < 20) {
+                return "#5ee432";
+                }else if(value < 40) {
+                return "#fffa50";
+                }else if(value < 60) {
+                return "#f7aa38";
+                }else {
+                return "#ef4655";
+                }
+            }
+        }
+    )
 })
 
-watch(() => props.value, (newValue, oldValue) => {
-    setGauge(props.id,newValue)
+onUpdated(() => {
+    gauge.value.setValue(props.value)
 })
 
 </script>
 
 <template>
-    <div :id="props.id" class="gauge-container two"></div>
+    <div :id="props.id"  class="gauge-container two"></div>
 </template>

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  server: 
+    build: ./server
+    ports:
+      - 5000:5000
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - my_network
+  vue:
+    build: ./client
+    ports:
+      - 8080:3000
+    networks:
+      - my_network
+networks:
+  my_network:
