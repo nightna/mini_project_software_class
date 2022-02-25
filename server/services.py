@@ -29,8 +29,17 @@ def update_node_data(node_id, temp, humi):
     db.insert_or_update(sql, val)
 
 def get_sensor_data():
-    sql = "SELECT * FROM sensor_data"
+    sql = "SELECT * FROM sensor_data WHERE 1 and created_at BETWEEN '2022-02-00%' and  '2022-02-03%' "
     return db.select(sql)
+
+def get_sensor_dataMONTH():
+    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-00-00%' and  '2022-03-00%'  "
+    return db.select(sql)
+
+def get_sensor_dataWeek():
+    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-00-00%' and  '2022-03-00%'  "
+    return db.select(sql)
+
 
 def get_node_data():
     sql = "SELECT * FROM node"
