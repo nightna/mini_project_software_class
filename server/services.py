@@ -1,10 +1,10 @@
 from db import DB
 import datetime
 
-host="remotemysql.com"
-user = "l3TwHwPuiC"
-db = "l3TwHwPuiC"
-password = "V990J6oxnK"
+host="localhost"
+user = "root"
+db = "mini_project"
+password = ""
 
 db = DB(host, user, db, password)
 
@@ -29,7 +29,7 @@ def update_node_data(node_id, temp, humi):
     db.insert_or_update(sql, val)
 
 def get_sensor_data():
-    sql = "SELECT * FROM sensor_data WHERE 1 and created_at BETWEEN '2022-02-00%' and  '2022-02-03%' "
+    sql = "SELECT * FROM sensor_data WHERE   created_at BETWEEN '2022-02-00%' and  '2022-02-02%' "
     return db.select(sql)
 
 def get_sensor_dataMONTH():
@@ -37,7 +37,7 @@ def get_sensor_dataMONTH():
     return db.select(sql)
 
 def get_sensor_dataWeek():
-    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-00-00%' and  '2022-03-00%'  "
+    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-02-00%' and  '2022-02-07%'  "
     return db.select(sql)
 
 
