@@ -1,14 +1,12 @@
-from server.services import save_data
+from services import save_data
 from datetime import datetime
 import random
 
-count = 3
-
-for day in range(count):
+for day in range(1):
     for t in range(24):
-        time = datetime(2022, 2, day + 1, t)
-        temp = random.randrange(25, 35)
-        humi = random.randrange(40, 50)
+        time = datetime(2022, 3, day + 1, t)
+        temp = random.randrange(25, 30)
+        humi = random.randrange(60, 70)
 
         save_data(1, temp, humi, time)
 

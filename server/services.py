@@ -1,5 +1,7 @@
 from db import DB
 import datetime
+from datetime import datetime, date, timedelta
+from calendar import monthrange
 
 host="localhost"
 user = "root"
@@ -28,18 +30,23 @@ def update_node_data(node_id, temp, humi):
     val = (temp,humi,getDateformatted(),node_id)
     db.insert_or_update(sql, val)
 
-def get_sensor_data():
-    sql = "SELECT * FROM sensor_data WHERE   created_at BETWEEN '2022-02-00%' and  '2022-02-02%' "
-    return db.select(sql)
+def get_sensor_data(mode = 'd'):
+    sql = "SELECT * FROM sensor_data"
+    today = date.today()
 
-def get_sensor_dataMONTH():
-    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-00-00%' and  '2022-03-00%'  "
+    if mode == "d":
+        prev = today - timedelta(days=1)
+        sql += f" WHERE created_at > '{prev} 23:59' AND created_at <= '{today} 23:59'"
+        print("day")
+    elif mode == "m":
+        prev = today - timedelta(days=30)
+        sql += f"  WHERE created_at >= '{prev} 00:00' AND created_at <= '{today} 23:59'" # prev month
+        print("month")
+    elif mode == 'w':
+        prev = today - timedelta(days=6)
+        sql += f"  WHERE created_at >= '{prev} 00:00' AND created_at <= '{today} 23:59'"
+    print(sql)
     return db.select(sql)
-
-def get_sensor_dataWeek():
-    sql = "SELECT * FROM sensor_data WHERE 1 and created_at  BETWEEN '2022-02-00%' and  '2022-02-07%'  "
-    return db.select(sql)
-
 
 def get_node_data():
     sql = "SELECT * FROM node"

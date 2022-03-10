@@ -19,7 +19,11 @@ def sensor_data():
         services.update_node_data(node_id, temp, humi)
         return make_response(jsonify({"status": "OK"},200))
     elif request.method == "GET":
-        data = services.get_sensor_dataWeek()
+        param = request.args
+        mode = param.get('mode')
+        
+        data = services.get_sensor_data(mode)
+        print(data)
         return make_response(jsonify(data), 200)
 
 # read

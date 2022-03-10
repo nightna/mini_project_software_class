@@ -14,10 +14,10 @@ const {chartData} = storeToRefs(store)
 
 const options = ref({
     scales: {
-        y: {
-            min: 0,
-            max: 100,
-        },
+      y: {
+          min: 0,
+          max: 100,
+      }
     },
     plugins: {
       zoom: {
